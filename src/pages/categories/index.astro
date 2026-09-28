@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { href, slugify, sortPosts, uniqueValues } from '@/lib/content';
+const posts = sortPosts(await getCollection('blog'));
+const categories = uniqueValues(posts, 'category');
+---
+<BaseLayout title="Categories — Quietly" description="Browse Quietly stories by category.">
+<section class="shell page-intro"><p class="section-kicker">Browse</p><h1>Categories</h1><p>Find stories by theme.</p></section>
+<section class="shell section-stack compact-section"><div class="category-grid large">{categories.map((category) => <a class="category-card" href={href(`/categories/${slugify(category)}/`)}><span>{category}</span><span aria-hidden="true">↗</span></a>)}</div></section>
+</BaseLayout>

@@ -1,0 +1,7 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+<BaseLayout title="About — Quietly" description="About the Quietly journal.">
+<section class="shell page-intro narrow"><p class="section-kicker">About</p><h1>A little more room to notice things.</h1><p>Quietly is a sample editorial site inspired by the original Vite/React journal concept in this repository. The Astro version turns each story into a Markdown content entry so the site can be edited without touching page components.</p></section>
+<section class="shell about-grid"><div class="about-card"><p class="section-kicker">The idea</p><h2>Content lives in Markdown.</h2><p>Add a new <code>.md</code> file to <code>src/content/blog/</code>, fill in the frontmatter, write your article, and the build generates the archive, article page, category pages, tags, RSS, sitemap, and SEO metadata.</p></div><div class="about-card"><p class="section-kicker">The stack</p><h2>Astro + Vite + GitHub Pages.</h2><p>There is no client-side React router and no server runtime. The GitHub Actions workflow builds the site and deploys the static output through GitHub Pages.</p></div></section>
+</BaseLayout>

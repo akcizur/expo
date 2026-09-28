@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PostCard from '@/components/PostCard.astro';
+import { href, sortPosts, uniqueValues, slugify } from '@/lib/content';
+const posts = sortPosts(await getCollection('blog'));
+const categories = uniqueValues(posts, 'category');
+---
+<BaseLayout title="Journal — Quietly" description="Browse all Quietly journal stories.">
+<section class="shell page-intro"><p class="section-kicker">Journal</p><h1>All stories</h1><p>Browse the full archive or narrow it down by category.</p></section>
+<section class="shell archive-bar" aria-label="Journal categories">
+  <a class="filter-pill active" href={href('/journal/')}>All</a>
+  {categories.map((category) => <a class="filter-pill" href={href(`/categories/${slugify(category)}/`)}>{category}</a>)}
+</section>
+<section class="shell section-stack"><div class="post-grid three-col">{posts.map((post) => <PostCard post={post} />)}</div></section>
+</BaseLayout>

@@ -1,0 +1,5 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { href } from '@/lib/content';
+---
+<BaseLayout title="404 — Quietly"><section class="shell error-page"><p class="error-code">404</p><h1>This page wandered off.</h1><p>There is nothing here yet. Try heading back to the journal.</p><a class="button button-dark" href={href('/journal/')}>Return to journal</a></section></BaseLayout>

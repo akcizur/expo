@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PostCard from '@/components/PostCard.astro';
+import { href, slugify, sortPosts } from '@/lib/content';
+export async function getStaticPaths() {
+  const posts = sortPosts(await getCollection('blog'));
+  const categories = [...new Set(posts.map((post) => post.data.category))];
+  return categories.map((category) => ({ params: { category: slugify(category) }, props: { category } }));
+}
+const { category } = Astro.props;
+const filtered = sortPosts(await getCollection('blog')).filter((post) => post.data.category === category);
+---
+<BaseLayout title={`${category} — Quietly`} description={`Quietly stories about ${category.toLowerCase()}.`}>
+<section class="shell page-intro"><a class="back-link" href={href('/categories/')}>← All categories</a><p class="section-kicker">Category</p><h1>{category}</h1><p>{filtered.length} {filtered.length === 1 ? 'story' : 'stories'} in this collection.</p></section>
+<section class="shell section-stack compact-section"><div class="post-grid three-col">{filtered.map((post) => <PostCard post={post} />)}</div></section>
+</BaseLayout>
