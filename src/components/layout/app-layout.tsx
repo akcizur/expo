@@ -1,0 +1,15 @@
+import { Outlet } from "react-router-dom";
+import SiteFooter from "./site-footer";
+import SiteHeader from "./site-header";
+
+export default function AppLayout() {
+  return (
+    <div className="flex min-h-screen flex-col bg-background">
+      <SiteHeader />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
